@@ -1,0 +1,76 @@
+meta:
+  description: "Base settings"
+
+model:
+  type: "XGBRegressor"  # Supported: XGBRegressor, RandomForestRegressor
+  # XGBRegressor and RandomForestRegressor
+  test_size: 0.2
+  test_size_shuffle: false
+  n_estimators: 1200
+  max_depth: 3
+  random_state: 42
+  # XGBRegressor only
+  learning_rate: 0.05
+  subsample: 0.8
+  colsample_bytree: 0.7
+  reg_lambda: 1.0
+
+training:
+  data_resolution: "daily"  # daily, hourly
+  forward_selection: false
+  limit_training_data: true  # Attention! Set to “false” for tests only.
+  use_clearsky_feature: false
+  normalize_by_clearsky: false
+  months: [7, 8, 9]
+
+evaluation:
+  auto_eval: true
+  night_clamp: true
+  night_clamp_threshold: 5
+  store: true
+  eval_with_weather_history_data: false  # Attention! Set to “true” for tests only.
+  forecast_horizon: 1
+  aggregate_hourly_to_daily: false  # Attention! Experimental
+
+features:
+  weather:
+    - temperature_2m
+    - relative_humidity_2m
+    - dew_point_2m
+    - rain
+    - snowfall
+    - pressure_msl
+    - cloud_cover
+    - cloud_cover_low
+    - cloud_cover_mid
+    - cloud_cover_high
+    - wind_speed_10m
+    - wind_direction_10m
+#    - et0_fao_evapotranspiration
+#    - wind_gusts_10m
+#    - surface_pressure
+#    - precipitation
+#    - vapour_pressure_deficit
+#    - apparent_temperature
+  solar_pos:
+    - apparent_elevation
+    - apparent_zenith
+    - azimuth
+  timestamp:
+    - hour_sin
+    - hour_cos
+    - day_sin
+    - day_cos
+
+params:
+  LATITUDE:
+  LONGITUDE:
+  START_DATE:
+  START_FORECAST_DATE:
+  TIMEZONE: "Europe/Berlin"
+  TILT_DEG:
+  STRINGS:
+  end_date:
+  eps_pcs: 0.2
+  pvwatts_gamma: -0.004
+  pvwatts_temp: 25.0
